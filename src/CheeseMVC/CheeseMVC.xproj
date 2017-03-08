@@ -14,6 +14,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
+    <ApplicationInsightsResourceId>/subscriptions/4627b355-adac-49e0-8504-d0abc44ce50c/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/CheeseMVC</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include="bower.json" />
