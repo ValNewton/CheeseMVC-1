@@ -1,11 +1,5 @@
 ﻿@{
     Layout = null;
-
-//    View data should be created in the controller
-//    List<string> cheeses = new List<string>();
-//    cheeses.Add("Cheddar");
-//    cheeses.Add("Munster");
-//    cheeses.Add("Parmesan");
 }
 
 <h1>MyCheeses</h1>
@@ -18,9 +12,9 @@
 }
 
 <ul>
-    @foreach (string cheese in ViewBag.cheeses)
+    @foreach (KeyValuePair<string, string> cheese in ViewBag.cheeses)
     {
-        <li>@cheese</li>
+        <li>@cheese.Key ~ @cheese.Value</li>
     }
 </ul>
 

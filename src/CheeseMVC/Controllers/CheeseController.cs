@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace CheeseMVC.Controllers
 {
     // view location: /Views/Cheese/*
@@ -12,7 +11,7 @@ namespace CheeseMVC.Controllers
     {
         // static propery is available to *any* instance
         // of the CheeseController class
-        private static List<string> cheeses = new List<string>();
+        private static Dictionary<string, string> cheeses = new Dictionary<string, string>();
 
         // Display the list of cheeses
         // GET: /cheese
@@ -40,10 +39,10 @@ namespace CheeseMVC.Controllers
         // from which we loaded it: /Cheese/Add
         [Route("/cheese/add")]
         [HttpPost]
-        public IActionResult NewCheese(string name)
+        public IActionResult NewCheese(string name, string description)
         {
             // add new cheese to static class list
-            cheeses.Add(name);
+            cheeses.Add(name, description);
 
             // go back to the list of cheeses
             return Redirect("/cheese");
