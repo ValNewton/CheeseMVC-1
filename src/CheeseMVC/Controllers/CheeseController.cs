@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,8 @@ namespace CheeseMVC.Controllers
 
         public IActionResult Add()
         {
+            ViewBag.error = "";
+
             // /Views/Cheese/Add.cshtml
             return View();
         }
@@ -39,12 +42,59 @@ namespace CheeseMVC.Controllers
         // from which we loaded it: /Cheese/Add
         [Route("/cheese/add")]
         [HttpPost]
-        public IActionResult NewCheese(string name, string description)
+        public IActionResult NewCheese(string name = "", string description = "")
         {
+            ViewBag.error = "";
+            // valid cheese names: letters and spaces
+            Regex validCheeseNamePattern = new Regex(@"[a-zA-Z\s]+");
+
+            if (name == null || !validCheeseNamePattern.IsMatch(name))
+            {
+                // cheese name is not valid, re-render the form and
+                // send an error message
+                ViewBag.error = "#fakecheese!";
+                return View("Add");
+            }
+   
             // add new cheese to static class list
             cheeses.Add(name, description);
 
             // go back to the list of cheeses
+            return Redirect("/cheese");
+        }
+
+        [Route("/cheese/remove")]
+        [HttpGet]
+        public IActionResult Remove()
+        {
+            ViewBag.cheeses = cheeses;
+            return View("Remove");
+        }
+
+        [Route("/cheese/remove")]
+        [HttpPost]
+        public IActionResult RemoveManyCheeses(string[] selectedCheeses)
+        {
+            foreach (string cheeseName in selectedCheeses)
+            {
+                if (cheeses.ContainsKey(cheeseName))
+                {
+                    cheeses.Remove(cheeseName);
+                }
+            }
+
+            return Redirect("/cheese");
+        }
+
+        [Route("/cheese/remove/{cheeseName}")]
+        [HttpGet]
+        public IActionResult RemoveSingleCheese(string cheeseName = "")
+        {
+            if (cheeses.ContainsKey(cheeseName))
+            {
+                cheeses.Remove(cheeseName);
+            }
+
             return Redirect("/cheese");
         }
     }

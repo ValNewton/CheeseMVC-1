@@ -3,6 +3,11 @@
 
 <h1>Add Cheese</h1>
 
+@if (ViewBag.error.Length > 0)
+{
+    <p style="color: red;">@ViewBag.error</p>
+}
+
 <form method="post">
     <label>Name</label>
     <input name="name" type="text"/>

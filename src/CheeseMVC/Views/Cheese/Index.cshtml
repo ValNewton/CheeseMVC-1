@@ -13,7 +13,13 @@
 <ul>
     @foreach (KeyValuePair<string, string> cheese in ViewBag.cheeses)
     {
-        <li>@cheese.Key ~ @cheese.Value</li>
+        <li>
+            <strong>@cheese.Key</strong>
+            (<a asp-controller="Cheese"
+                asp-action="RemoveSingleCheese"
+                asp-route-cheeseName="@cheese.Key">delete</a>)
+            <p><em>@cheese.Value</em></p>
+        </li>
     }
 </ul>
 

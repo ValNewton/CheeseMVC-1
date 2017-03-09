@@ -1,4 +1,6 @@
-# [Class 4](http://education.launchcode.org/skills-back-end-csharp/class-prep/4/)
+# Class 4
+
+[Class 4 Prep](http://education.launchcode.org/skills-back-end-csharp/class-prep/4/)
 
 ## Intro to ASP.NET Core MVC: Views (Part 1)
 
@@ -63,3 +65,57 @@ public class CheeseController : Controller
 
 The `Controller.Redirect()` method returns a `RedirectResult`, which can be returned from a controller action method to take the user to some other route.
 
+## Studio
+
+**Routing parameters can be added to anchors using special MVC helper attributes.**
+
+*In the controller:*
+
+```cs
+[Route("/cheese/remove/{cheeseName}")]
+[HttpGet]
+public IActionResult RemoveSingleCheese(string cheeseName)
+{
+    // ... remove the cheese
+    return Redirect("/cheese");
+}
+```
+
+*In the view:*
+
+```html
+<a asp-controller="Cheese"
+   asp-action="RemoveSingleCheese"
+   asp-route-cheeseName="@cheeseName">delete</a>
+```
+
+**Inputs can be submitted as an array of values to an action method.**
+
+*In the controller:*
+
+```cs
+[Route("/cheese/remove")]
+[HttpPost]
+public IActionResult RemoveManyCheeses(string[] selectedCheeses)
+{
+    // ... remove the cheeses
+    return Redirect("/cheese");
+}
+```
+
+*In the view:*
+
+```html
+<form method="post">
+<ul>
+    @foreach (KeyValuePair<string, string> cheese in ViewBag.cheeses)
+    {
+        <li>
+            <input name="selectedCheeses[]" type="checkbox" value="@cheese.Key" />
+            <label>@cheese.Key</label>
+        </li>
+    }
+</ul>
+<input type="submit" valu="Delete Cheeses"/>
+</form>
+```
