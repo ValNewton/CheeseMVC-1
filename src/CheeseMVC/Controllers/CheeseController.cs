@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseMVC.Controllers
@@ -12,7 +13,11 @@ namespace CheeseMVC.Controllers
     {
         // static propery is available to *any* instance
         // of the CheeseController class
-        private static Dictionary<string, string> cheeses = new Dictionary<string, string>();
+        private static List<Cheese> cheeses = new List<Cheese>();
+
+        // alternative dictionary implementation
+        //
+        // private static Dictionary<string, Cheese> cheeses = new Dictionary<string, Cheese>();
 
         // Display the list of cheeses
         // GET: /cheese
@@ -45,10 +50,9 @@ namespace CheeseMVC.Controllers
         public IActionResult NewCheese(string name = "", string description = "")
         {
             ViewBag.error = "";
+            
             // valid cheese names: letters and spaces
-            Regex validCheeseNamePattern = new Regex(@"[a-zA-Z\s]+");
-
-            if (name == null || !validCheeseNamePattern.IsMatch(name))
+            if (!Cheese.IsValidName(name))
             {
                 // cheese name is not valid, re-render the form and
                 // send an error message
@@ -57,7 +61,12 @@ namespace CheeseMVC.Controllers
             }
    
             // add new cheese to static class list
-            cheeses.Add(name, description);
+            cheeses.Add(new Cheese(name, description));
+
+            // alternative dictionary implementation for
+            // Dictionary<string, Cheese>
+            //
+            // cheeses.Add(name, new Cheese(name, description));
 
             // go back to the list of cheeses
             return Redirect("/cheese");
@@ -77,11 +86,28 @@ namespace CheeseMVC.Controllers
         {
             foreach (string cheeseName in selectedCheeses)
             {
-                if (cheeses.ContainsKey(cheeseName))
+                // create an array so we aren't attempting to remove
+                // cheeses from the List<Cheese> while iterating
+                // over it at the same time
+                foreach (Cheese cheese in cheeses.ToArray())
                 {
-                    cheeses.Remove(cheeseName);
+                    if (cheese.Name.Equals(cheeseName))
+                    {
+                        cheeses.Remove(cheese);
+                    }
                 }
             }
+
+            // alternative dictionary implementation for
+            // Dictionary<string, Cheese>
+            //
+            // foreach (string cheeseName in selectedCheeses)
+            // {
+            //    if (cheeses.ContainsKey(cheeseName))
+            //    {
+            //        cheeses.Remove(cheeseName);
+            //   }
+            // }
 
             return Redirect("/cheese");
         }
@@ -90,10 +116,25 @@ namespace CheeseMVC.Controllers
         [HttpGet]
         public IActionResult RemoveSingleCheese(string cheeseName = "")
         {
-            if (cheeses.ContainsKey(cheeseName))
+            // create an array so we aren't attempting to remove
+            // cheeses from the List<Cheese> while iterating
+            // over it at the same time
+            foreach (Cheese cheese in cheeses.ToArray())
             {
-                cheeses.Remove(cheeseName);
+                if (cheese.Name.Equals(cheeseName))
+                {
+                    cheeses.Remove(cheese);
+                    break;
+                }
             }
+
+            // alternative dictionary implementation for
+            // Dictionary<string, Cheese>
+            //
+            // if (cheeses.ContainsKey(cheeseName))
+            // {
+            //    cheeses.Remove(cheeseName);
+            // }
 
             return Redirect("/cheese");
         }
