@@ -1,3 +1,9 @@
+# Class 8
+
+[Class 8 Prep](http://education.launchcode.org/skills-back-end-csharp/videos/intro-to-mvc-models/)
+
+**NOTE: I did not start/end with the Git branches specified in the prep work description. All of my code modifications may be found in the `class-8-prep` branch.**
+
 # Class 5
 
 [Class 5 Prep](http://education.launchcode.org/skills-back-end-csharp/class-prep/5/)
