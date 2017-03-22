@@ -20,15 +20,15 @@ namespace CheeseMVC.Models
         {
             // default constructor is required for model
             // binding in controllers
+
+            CheeseId = nextId;
+            nextId += 1;
         }
 
-        public Cheese(string name, string description)
+        public Cheese(string name, string description) : this()
         {
-            CheeseId = nextId;
             Name = name;
             Description = description;
-
-            nextId += 1;
         }
 
         public static bool IsValidName(string name)

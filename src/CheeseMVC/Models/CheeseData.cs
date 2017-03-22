@@ -22,16 +22,16 @@ namespace CheeseMVC.Models
         }
 
         // Remove
-        public static void Remove(int id)
+        public static void Remove(int cheeseId)
         {
-            Cheese cheeseToRemove = GetById(id);
+            Cheese cheeseToRemove = GetById(cheeseId);
             cheeses.Remove(cheeseToRemove);
         }
         
         // GetById
-        private static Cheese GetById(int id)
+        public static Cheese GetById(int cheeseId)
         {
-            return cheeses.Single(cheese => cheese.CheeseId == id);
+            return cheeses.Single(cheese => cheese.CheeseId == cheeseId);
         }
     }
 }

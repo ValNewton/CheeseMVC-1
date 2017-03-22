@@ -16,9 +16,15 @@
     {
         <li>
             <strong>@cheese.Name</strong>
-            (<a asp-controller="Cheese"
-                asp-action="RemoveSingleCheese"
-                asp-route-cheeseId="@cheese.CheeseId">delete</a>)
+            (
+            <a asp-controller="Cheese"
+               asp-action="RemoveSingleCheese"
+               asp-route-cheeseId="@cheese.CheeseId">delete</a>
+            &nbsp;|&nbsp;
+            <a asp-controller="Cheese" 
+               asp-action="Edit" 
+               asp-route-cheeseId="@cheese.CheeseId">edit</a>
+            )
             <p><em>@cheese.Description</em></p>
         </li>
     }

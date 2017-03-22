@@ -1,0 +1,17 @@
+﻿@{
+}
+<h1>Edit Cheese @ViewBag.cheese.Name (id=@ViewBag.cheese.CheeseId)</h1>
+
+@if (ViewBag.error.Length > 0)
+{
+    <p style="color: red;">@ViewBag.error</p>
+}
+
+<form method="post">
+    <input type="hidden" value="@ViewBag.cheese.CheeseId" name="id" />
+    <label>Name</label>
+    <input name="name" type="text" value="@ViewBag.cheese.Name"/>
+    <label>Description</label>
+    <input name="description" type="text" value="@ViewBag.cheese.Description"/>
+    <input type="submit" value="Save Cheese"/>
+</form>
