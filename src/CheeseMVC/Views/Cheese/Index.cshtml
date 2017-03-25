@@ -10,22 +10,35 @@
     <p>No cheeses yet!</p>
 }
 
-<ul>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
     @foreach (Cheese cheese in Model)
     {
-        <li>
-            <strong>@cheese.Name</strong>
-            (
-            <a asp-controller="Cheese"
-               asp-action="RemoveSingleCheese"
-               asp-route-cheeseId="@cheese.CheeseId">delete</a>
-            &nbsp;|&nbsp;
-            <a asp-controller="Cheese" 
-               asp-action="Edit" 
-               asp-route-cheeseId="@cheese.CheeseId">edit</a>
-            )
-            <p><em>@cheese.Description</em></p>
-        </li>
+        <tr>
+            <td>@cheese.Name</td>
+            <td>@cheese.Description</td>
+            <td>@cheese.Type</td>
+            <td>
+                (
+                <a asp-controller="Cheese"
+                   asp-action="RemoveSingleCheese"
+                   asp-route-cheeseId="@cheese.CheeseId">delete</a>
+                &nbsp;|&nbsp;
+                <a asp-controller="Cheese"
+                   asp-action="Edit"
+                   asp-route-cheeseId="@cheese.CheeseId">edit</a>
+                )
+            </td>
+        </tr>
     }
-</ul>
+    </tbody>
+</table>
 

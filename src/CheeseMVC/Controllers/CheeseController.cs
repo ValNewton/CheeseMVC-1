@@ -58,6 +58,7 @@ namespace CheeseMVC.Controllers
                 viewModel.Name,
                 viewModel.Description
             );
+            newCheese.Type = viewModel.Type;
             CheeseData.Add(newCheese);
 
             // go back to the list of cheeses

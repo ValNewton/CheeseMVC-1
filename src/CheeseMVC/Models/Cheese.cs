@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace CheeseMVC.Models
 {
@@ -11,6 +7,7 @@ namespace CheeseMVC.Models
         public int CheeseId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public CheeseType Type { get; set; }
 
         private static int nextId = 1;
 
