@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CheeseMVC.Models;
+using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseMVC.Controllers
@@ -16,19 +17,19 @@ namespace CheeseMVC.Controllers
         public IActionResult Index()
         {
             // data for the view
-            ViewBag.cheeses = CheeseData.GetAll();
+            List<Cheese> cheeses = CheeseData.GetAll();
 
             // view defaults to action name: Index.cshtml
             // /Views/Cheese/Index.cshtml
-            return View();
+            return View(cheeses);
         }
 
         public IActionResult Add()
         {
-            ViewBag.error = "";
+            AddCheeseViewModel viewModel = new AddCheeseViewModel();
 
             // /Views/Cheese/Add.cshtml
-            return View();
+            return View(viewModel);
         }
 
         // by default, the route will be: /Cheese/NewCheese
@@ -45,13 +46,20 @@ namespace CheeseMVC.Controllers
         //
         [Route("/cheese/add")]
         [HttpPost]
-        public IActionResult NewCheese(Cheese newCheese)
+        public IActionResult NewCheese(AddCheeseViewModel viewModel)
         {
-            ViewBag.error = "";
-  
+            if (!ModelState.IsValid)
+            {
+                return View("Add", viewModel);
+            }
+
             // add new cheese to static class list
+            Cheese newCheese = new Cheese(
+                viewModel.Name,
+                viewModel.Description
+            );
             CheeseData.Add(newCheese);
-            
+
             // go back to the list of cheeses
             return Redirect("/cheese");
         }
