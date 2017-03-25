@@ -18,6 +18,21 @@ namespace CheeseMVC.ViewModels
 
         public List<SelectListItem> CheeseTypes { get; set; }
 
+        [Range(1, 5)]
+        public int Rating { get; set; } = 5;
+
+        public Cheese CreateCheese()
+        {
+            return new Cheese()
+            {
+                Name = Name,
+                Description = Description,
+                Type = Type,
+                Rating = Rating
+            };
+
+        }
+
         public AddCheeseViewModel()
         {
             CheeseTypes = new List<SelectListItem>();

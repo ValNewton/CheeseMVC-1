@@ -54,11 +54,7 @@ namespace CheeseMVC.Controllers
             }
 
             // add new cheese to static class list
-            Cheese newCheese = new Cheese(
-                viewModel.Name,
-                viewModel.Description
-            );
-            newCheese.Type = viewModel.Type;
+            Cheese newCheese = viewModel.CreateCheese();
             CheeseData.Add(newCheese);
 
             // go back to the list of cheeses
@@ -111,10 +107,16 @@ namespace CheeseMVC.Controllers
         [HttpPost]
         public IActionResult Edit(EditCheeseViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", viewModel);
+            }
+
             Cheese cheese = CheeseData.GetById(viewModel.CheeseId);
             cheese.Name = viewModel.Name;
             cheese.Description = viewModel.Description;
             cheese.Type = viewModel.Type;
+            cheese.Rating = viewModel.Rating;
             return Redirect("/cheese");
         }
     }
