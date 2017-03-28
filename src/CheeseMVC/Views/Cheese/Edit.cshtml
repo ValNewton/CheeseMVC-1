@@ -25,6 +25,16 @@
         <input type="number" min="1" max="5" asp-for="Rating" />
         <span asp-validation-for="Rating"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Odor"></label>
+        <input type="text" asp-for="Odor" />
+        <span asp-validation-for="Odor"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input type="number" asp-for="Age" />
+        <span asp-validation-for="Age"></span>
+    </div>
     <input type="hidden" asp-for="CheeseId" />
     <input type="submit" value="Save Cheese" />
 </form>

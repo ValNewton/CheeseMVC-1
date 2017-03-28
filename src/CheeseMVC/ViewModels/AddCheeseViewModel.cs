@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,8 @@ namespace CheeseMVC.ViewModels
 {
     public class AddCheeseViewModel
     {
+        // ProhibitedCheeseValidatorAttribute.cs
+        [ProhibitedCheeseValidator(new[] { "provel" })]
         [Required]
         [Display(Name = "Cheese Name")]
         public string Name { get; set; } = "";
@@ -20,6 +23,15 @@ namespace CheeseMVC.ViewModels
 
         [Range(1, 5)]
         public int Rating { get; set; } = 5;
+
+        // OdorValidatorAttribute.cs
+        [OdorValidator]
+        [Required]
+        public string Odor { get; set; }
+
+        // CheeseAgeValidator.cs
+        [CustomValidation(typeof(CheeseAgeValidator), "IsValidAge")]
+        public int Age { get; set; }
 
         public Cheese CreateCheese()
         {
