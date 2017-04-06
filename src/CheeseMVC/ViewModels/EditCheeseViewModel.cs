@@ -1,4 +1,5 @@
-﻿using CheeseMVC.Models;
+﻿using System.Collections.Generic;
+using CheeseMVC.Models;
 
 namespace CheeseMVC.ViewModels
 {
@@ -6,17 +7,15 @@ namespace CheeseMVC.ViewModels
     {
         public int CheeseId { get; set; }
 
-        public EditCheeseViewModel()
+        public EditCheeseViewModel(Cheese cheese, List<CheeseCategory> categories) : base(categories)
         {
-        }
-
-        public EditCheeseViewModel(Cheese cheese)
-        {
-            CheeseId = cheese.CheeseId;
+            CheeseId = cheese.ID;
             Name = cheese.Name;
             Description = cheese.Description;
-            Type = cheese.Type;
+            SelectedCheeseCategoryID = cheese.CategoryID;
             Rating = cheese.Rating;
+            Odor = cheese.Odor;
+            Age = cheese.Age;
         }
     }
 }

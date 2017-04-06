@@ -1,3 +1,14 @@
+# CheeseMVC
+
+## Class 12 Prep
+
+**NOTE**: The code for class 12 prep does not follow the [video tutorials](http://education.launchcode.org/skills-back-end-csharp/class-prep/12/) *exactly*. It is not based on the Entity Framework starter project, but is rather a natural progression from previous CheeseMVC lessons. The chief differences are:
+
+- there is no `CategoryController`, all category routes are in `CheeseController`
+- there is no user interface for creating a new `CheeseCategory`, this must be done manually through SQL Server Object Explorer
+- The view models may contain properties that are named differently (for example, `NewCheeseViewModel.SelectedCheeseCategoryID` instead of `NewCheeseViewModel.CategoryID`)
+- there are several more migrations because I changed the `Cheese` class incrementally
+
 # Class 9
 
 [Class 9 Prep](http://education.launchcode.org/skills-back-end-csharp/videos/intro-to-mvc-viewmodels-1/)

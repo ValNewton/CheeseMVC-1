@@ -1,5 +1,5 @@
 ﻿@using CheeseMVC.Models
-@model List<Cheese>
+@model IList<Cheese>
 
 <h1>MyCheeses</h1>
 
@@ -16,8 +16,10 @@ else
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Type</th>
+            <th>Category</th>
             <th>Rating</th>
+            <th>Odor</th>
+            <th>Age</th>
             <th>Options</th>
         </tr>
         </thead>
@@ -27,17 +29,23 @@ else
             <tr>
                 <td>@cheese.Name</td>
                 <td>@cheese.Description</td>
-                <td>@cheese.Type</td>
+                <td>
+                    <a asp-controller="Cheese"
+                       asp-action="Category"
+                       asp-route-categoryID="@cheese.CategoryID">@cheese.Category.Name</a>
+                </td>
                 <td>@cheese.Rating</td>
+                <td>@cheese.Odor</td>
+                <td>@cheese.Age</td>
                 <td>
                     (
                     <a asp-controller="Cheese"
                        asp-action="RemoveSingleCheese"
-                       asp-route-cheeseId="@cheese.CheeseId">delete</a>
+                       asp-route-cheeseId="@cheese.ID">delete</a>
                     &nbsp;|&nbsp;
                     <a asp-controller="Cheese"
                        asp-action="Edit"
-                       asp-route-cheeseId="@cheese.CheeseId">edit</a>
+                       asp-route-cheeseId="@cheese.ID">edit</a>
                     )
                 </td>
             </tr>

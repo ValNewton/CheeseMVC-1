@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using CheeseMVC.Data;
 using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -8,6 +10,16 @@ namespace CheeseMVC.ViewModels
 {
     public class AddCheeseViewModel
     {
+        //
+        // reference data
+        //
+
+        private readonly List<CheeseCategory> categories;
+
+        //
+        // model binding properties
+        //
+
         // ProhibitedCheeseValidatorAttribute.cs
         [ProhibitedCheeseValidator(new[] { "provel" })]
         [Required]
@@ -17,9 +29,10 @@ namespace CheeseMVC.ViewModels
         [Required(ErrorMessage = "Describe your cheese, sir!")]
         public string Description { get; set; } = "";
 
-        public CheeseType Type { get; set; }
+        [Display(Name = "Cheese Category")]
+        public int SelectedCheeseCategoryID { get; set; }
 
-        public List<SelectListItem> CheeseTypes { get; set; }
+        public List<SelectListItem> CheeseCategories { get; set; }
 
         [Range(1, 5)]
         public int Rating { get; set; } = 5;
@@ -39,36 +52,29 @@ namespace CheeseMVC.ViewModels
             {
                 Name = Name,
                 Description = Description,
-                Type = Type,
-                Rating = Rating
+                Rating = Rating,
+                Odor = Odor,
+                Age = Age,
+                Category = categories.Single(c => c.ID == SelectedCheeseCategoryID)
             };
 
         }
 
-        public AddCheeseViewModel()
+        public AddCheeseViewModel(List<CheeseCategory> categories)
         {
-            CheeseTypes = new List<SelectListItem>();
+            this.categories = categories;
 
-            // <option value="0">Hard</option>
-            CheeseTypes.Add(new SelectListItem()
-            {
-                Value = ((int) CheeseType.Hard).ToString(),
-                Text = CheeseType.Hard.ToString()
-            });
+            CheeseCategories = new List<SelectListItem>();
 
-            // <option value="1">Soft</option>
-            CheeseTypes.Add(new SelectListItem()
+            foreach (CheeseCategory category in categories)
             {
-                Value = ((int)CheeseType.Soft).ToString(),
-                Text = CheeseType.Soft.ToString()
-            });
-
-            // <option value="2">Fake</option>
-            CheeseTypes.Add(new SelectListItem()
-            {
-                Value = ((int)CheeseType.Fake).ToString(),
-                Text = CheeseType.Fake.ToString()
-            });
+                // <option value="ID">Name</option>
+                CheeseCategories.Add(new SelectListItem()
+                {
+                    Value = category.ID.ToString(),
+                    Text = category.Name
+                });
+            }
         }
     }
 }

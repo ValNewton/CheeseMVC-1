@@ -16,7 +16,7 @@ else
             @foreach (Cheese cheese in ViewBag.cheeses)
             {
                 <li>
-                    <input name="cheeseIds" type="checkbox" value="@cheese.CheeseId" />
+                    <input name="cheeseIds" type="checkbox" value="@cheese.ID" />
                     <label>@cheese.Name</label>
                 </li>
             }
