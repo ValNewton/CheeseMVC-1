@@ -1,6 +1,14 @@
 # CheeseMVC
 
+## Class 13 Prep
+
+[Class 13 Prep](http://education.launchcode.org/skills-back-end-csharp/class-prep/13/)
+
+**NOTE**: Again, I augment our existing CheeseMVC app, and do *not* follow the starter code exactly. See my comments for Class 12 Prep below.
+
 ## Class 12 Prep
+
+[Class 12 Prep](http://education.launchcode.org/skills-back-end-csharp/class-prep/12/)
 
 **NOTE**: The code for class 12 prep does not follow the [video tutorials](http://education.launchcode.org/skills-back-end-csharp/class-prep/12/) *exactly*. It is not based on the Entity Framework starter project, but is rather a natural progression from previous CheeseMVC lessons. The chief differences are:
 

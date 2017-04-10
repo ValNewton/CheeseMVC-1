@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CheeseMVC.Models
 {
@@ -12,5 +13,6 @@ namespace CheeseMVC.Models
         public int Age { get; set; }
         public int CategoryID { get; set; }
         public CheeseCategory Category { get; set; }
+        public IList<CheeseMenu> CheeseMenus { get; set; }
     }
 }
