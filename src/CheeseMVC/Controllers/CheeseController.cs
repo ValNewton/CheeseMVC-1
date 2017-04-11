@@ -148,6 +148,21 @@ namespace CheeseMVC.Controllers
             return View("CategoryList", context.Categories.ToList());
         }
 
+        [HttpPost]
+        [Route("/cheese/category")]
+        public IActionResult Category(AddCheeseCategoryViewModel viewModel)
+        {
+            CheeseCategory category = new CheeseCategory
+            {
+                Name = viewModel.Name
+            };
+
+            context.Categories.Add(category);
+            context.SaveChanges();
+
+            return Json(new {id = category.ID});
+        }
+
         [Route("/cheese/category/{categoryID}")]
         public IActionResult Category(int categoryID)
         {
