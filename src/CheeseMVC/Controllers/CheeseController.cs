@@ -68,7 +68,7 @@ namespace CheeseMVC.Controllers
             }
 
             // add new cheese to static class list
-            Cheese newCheese = viewModel.CreateCheese();
+            Cheese newCheese = viewModel.CreateCheese(context.Categories.ToList());
             context.Cheeses.Add(newCheese);
             context.SaveChanges();
 

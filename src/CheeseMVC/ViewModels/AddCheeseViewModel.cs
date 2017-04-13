@@ -11,12 +11,6 @@ namespace CheeseMVC.ViewModels
     public class AddCheeseViewModel
     {
         //
-        // reference data
-        //
-
-        private readonly List<CheeseCategory> categories;
-
-        //
         // model binding properties
         //
 
@@ -46,7 +40,7 @@ namespace CheeseMVC.ViewModels
         [CustomValidation(typeof(CheeseAgeValidator), "IsValidAge")]
         public int Age { get; set; }
 
-        public Cheese CreateCheese()
+        public Cheese CreateCheese(IList<CheeseCategory> categories)
         {
             return new Cheese()
             {
@@ -60,12 +54,13 @@ namespace CheeseMVC.ViewModels
 
         }
 
-        public AddCheeseViewModel(List<CheeseCategory> categories)
+        public AddCheeseViewModel()
         {
-            this.categories = categories;
-
             CheeseCategories = new List<SelectListItem>();
+        }
 
+        public AddCheeseViewModel(List<CheeseCategory> categories) : this()
+        {
             foreach (CheeseCategory category in categories)
             {
                 // <option value="ID">Name</option>
